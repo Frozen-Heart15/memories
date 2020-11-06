@@ -1,0 +1,4 @@
+{
+    "mongoURI":"mongodb+srv://gaurav:gaurav123@cluster0.u6nbb.mongodb.net/MemoryDB?retryWrites=true&w=majority",
+    "jwtSecret":"jwtSecret"
+}
