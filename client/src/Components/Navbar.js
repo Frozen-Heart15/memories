@@ -17,8 +17,15 @@ const useStyles = makeStyles(theme=>({
         color:'grey',
         textDecoration:'none',
         fontSize:'1.3rem', 
-               
-    }
+        '&:hover':{
+            color:'blue',
+        }       
+    },
+    logo:{
+        color:'black',
+        textDecoration:'none',
+    },
+    
 
 }))
 
@@ -31,7 +38,9 @@ const Navbar = () => {
             <Grid container direction="row" justify="space-between" alignItems="center">
             <Grid item xs={6} container direction="row" s> 
                 <img src={logo} alt="logo" height="50px" width="50px" />
-                <Typography variant="h3" style={{fontFamily:'Pacifico, cursive'}} >Memories</Typography>    
+                <Link className={classes.logo} to="/">
+                <Typography variant="h3" style={{fontFamily:'Pacifico, cursive'}} >Memories</Typography> 
+                </Link>   
              </Grid>
             <Grid item md={2} container direction="row" justify="space-evenly" >
                 <Link className={classes.link} to="/login">Login</Link>

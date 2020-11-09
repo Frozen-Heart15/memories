@@ -7,7 +7,8 @@ const useStyles = makeStyles(theme=>({
     footer:{
         backgroundColor:'white',
         borderRadius:'10px',
-        marginTop:'50px',
+        marginTop:'80px',
+        marginBottom:'20px',
         padding:'10px',
         fontFamily:'Montserrat, sans-serif',
     },
@@ -23,7 +24,7 @@ const Footer = () => {
     return (
         <Container className={classes.footer}>
             <Typography variant="h6" align="center" color="textSecondary" >
-                &copy; Copyright 2020
+            Copyright &copy; Memories 2020
             </Typography>
         </Container>
     )
