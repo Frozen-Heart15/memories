@@ -9,9 +9,9 @@ connectDB();
 app.get('/',(req,res)=> res.send('Working!!'));
 
 //Define Routes
-app.use('/user',require('./routes/user'));
-app.use('/auth',require('./routes/auth'));
-app.use('/post',require('./routes/post'));
+app.use('/api/user',require('./routes/user'));
+app.use('/api/auth',require('./routes/auth'));
+app.use('/api/post',require('./routes/post'));
 
 
 //Listening

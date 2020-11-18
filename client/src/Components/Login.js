@@ -1,8 +1,10 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Container, Grid, Typography, TextField, Button} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import poster from '../images/skydive.jpg';
+import {connect} from 'react-redux';
+import {login} from '../actions/auth';
 
 const useStyles = makeStyles(theme=>({
     login:{
@@ -37,7 +39,7 @@ const useStyles = makeStyles(theme=>({
 
 }))
 
-const Login = () => {
+const Login = ({login, isAuthenticated}) => {
 
     const classes = useStyles();
 
@@ -48,7 +50,13 @@ const Login = () => {
     }
 
     const handleSubmit = (e)=>{
-        console.log(formData);
+        e.preventDefault();
+        login(formData.email,formData.password);
+        
+    }
+
+    if(isAuthenticated){
+        return <Redirect to="/"/>
     }
 
     return (
@@ -70,18 +78,18 @@ const Login = () => {
             <Grid item sm={4} container direction="column" alignContent="center" className={classes.login} >
             <Typography variant="h4" >Sign In</Typography>
 
-            <form className={classes.form} onSubmit={handleSubmit} > 
+            <form className={classes.form} autoComplete='off' noValidate onSubmit={handleSubmit} > 
 
             <TextField type="email" name="email" size="small" fullWidth
              variant="outlined"  placeholder="Email" margin="normal"
-             required
+             required autoComplete='email'
              value={formData.email}
              onChange={handleChange}
               /> 
 
               <TextField type="password" name="password" size="small" fullWidth
              variant="outlined"  placeholder="Password" margin="normal" required
-             value={formData.password}
+             value={formData.password} autoComplete='curret-password'
              onChange={handleChange}
               /> 
 
@@ -101,4 +109,8 @@ const Login = () => {
     )
 }
 
-export default Login
+const mapStateToProps = state =>({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps,{login})(Login)

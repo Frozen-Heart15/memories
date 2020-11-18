@@ -1,9 +1,10 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Container, Grid, Typography, TextField, Button} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import poster from '../images/trekking.jpg';
 import { setAlert } from '../actions/alert';
+import {register} from '../actions/auth';
 import {connect} from 'react-redux';
 
 
@@ -37,7 +38,7 @@ overlay:{
 
 }))
 
-const Register = ({setAlert}) => {
+const Register = ({setAlert,register, isAuthenticated}) => {
 
     const classes = useStyles();
 
@@ -47,12 +48,20 @@ const Register = ({setAlert}) => {
         setFormData({...formData,[e.target.name]:e.target.value});
     }
 
+    const {name,email,password,cpassword} = formData;
+
     const handleSubmit = (e)=>{
         e.preventDefault();
         console.log(formData);
-        if(formData.password !== formData.cpassword){
+        if(password !== cpassword){
             setAlert('Password does not match')
+        }else{
+            register({name,email,password});
         }
+    }
+
+    if(isAuthenticated){
+        return <Redirect to="/"/>
     }
 
     return (
@@ -74,7 +83,7 @@ const Register = ({setAlert}) => {
             <Grid item xs={4} container direction="column" alignContent="center" className={classes.register} >
             <Typography variant="h4" >Sign Up</Typography>
 
-            <form className={classes.root} onSubmit={handleSubmit} > 
+            <form className={classes.root} autoComplete='off' onSubmit={handleSubmit} > 
 
             <TextField type="text" name="name" size="small" fullWidth
              variant="outlined"  placeholder="Full Name" margin="normal"
@@ -119,4 +128,8 @@ const Register = ({setAlert}) => {
     )
 }
 
-export default connect(null,{setAlert})(Register)
+const mapStateToProps = state =>({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps,{setAlert,register})(Register)

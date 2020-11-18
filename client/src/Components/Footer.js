@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Grid, Typography} from '@material-ui/core';
+import {Container, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 
 

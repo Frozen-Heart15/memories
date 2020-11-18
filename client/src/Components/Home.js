@@ -1,12 +1,30 @@
-import React from 'react';
-import {Container} from '@material-ui/core';
+import React, {Fragment, useEffect} from 'react';
+import {Container, Grid} from '@material-ui/core';
+import {connect} from 'react-redux';
+import {getPosts} from '../actions/post';
+import PostItem from './PostItem';
 
-const Home = () => {
+const Home = ({getPosts, post:{posts, loading}}) => {
+
+    useEffect(()=>{
+        getPosts()
+    },[getPosts])
+
     return (
         <Container>
-            Home
+            <Grid container alignItems='stretch' spacing={2}>
+                {posts.map(post => {
+                    return (<Grid item xs={12} md={3} key={post._id}>
+                    <PostItem post={post}/>
+                    </Grid>)
+                })}
+            </Grid>
         </Container>
     )
 }
 
-export default Home
+const mapStateToProps = state =>({
+    post: state.post
+})
+
+export default connect(mapStateToProps,{getPosts})(Home);
