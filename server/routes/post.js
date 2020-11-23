@@ -49,6 +49,19 @@ router.get('/',async (req,res)=>{
     }
 })
 
+//@route    GET /post/user
+//@desc     get posts of a particular user
+//@access   Private
+router.get('/user',auth,async (req,res)=>{
+    try {
+        const posts = await Post.find({user:req.user.id}).sort({created_at:-1});
+        res.json(posts);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+})
+
 //@route    GET /post/:id
 //@desc     get a post
 //@access   Private
@@ -107,9 +120,12 @@ router.put('/like/:id',auth,async (req,res)=>{
 
         //Check if already liked
         if(post.likes.filter(like=>like.user.toString() === req.user.id).length > 0){
-            return res.json({message:"Post already liked"})
+            let index = post.likes.findIndex(like=> like.user.toString() === req.user.id)
+            post.likes.splice(index,1);
+            // res.json({message:"Post already liked"})
+        }else{
+            post.likes.unshift({user:req.user.id})
         }
-        post.likes.unshift({user:req.user.id})
         await post.save()
         res.json(post.likes);
 

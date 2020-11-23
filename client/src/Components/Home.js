@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import {Container, Grid} from '@material-ui/core';
 import {connect} from 'react-redux';
 import {getPosts} from '../actions/post';
@@ -8,14 +8,14 @@ const Home = ({getPosts, post:{posts, loading}}) => {
 
     useEffect(()=>{
         getPosts()
-    },[getPosts])
+    },[getPosts, posts])
 
     return (
-        <Container>
+        <Container style={{marginTop:'40px'}}>
             <Grid container alignItems='stretch' spacing={2}>
                 {posts.map(post => {
                     return (<Grid item xs={12} md={3} key={post._id}>
-                    <PostItem post={post}/>
+                    <PostItem post={post} canDelete={false}/>
                     </Grid>)
                 })}
             </Grid>
