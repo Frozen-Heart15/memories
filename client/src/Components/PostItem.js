@@ -10,12 +10,13 @@ import {deletePost, likePost} from '../actions/post';
 const useStyles = makeStyles(theme=>({
   card:{
     position:'relative',
-    zIndex:'1'
+    zIndex:'1',
+    height:'400px'
   },
   media:{
     backgroundColor:"rgba(0,0,0,0.3)",
     backgroundBlendMode:'darken',
-    height:'250px'
+    height:'230px'
   },
   overlay:{
     position:'absolute',
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme=>({
 const PostItem = ({auth, post:{_id, name,image, creator, created_at, title, message, likes,user,tags},canDelete, deletePost, likePost}) => {
     
     const classes = useStyles();
-
+  let msg = message.substring(0,50);
     
     return (
         
@@ -48,21 +49,24 @@ const PostItem = ({auth, post:{_id, name,image, creator, created_at, title, mess
 
             </div>
             <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography variant="body2" color="primary" component="p">
+            {tags.map(item => '#' + item.trim()+ ' ')}
+            </Typography>
+            <Typography  variant="h5" component="h2">
             {title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            {message}
+            {msg}
             </Typography>
         </CardContent>
         <CardActions>
-        <Button size="small" color="primary" onClick={()=>likePost(_id)} >
+        <Button size="small"  color="primary" onClick={()=>likePost(_id)} >
           <ThumbAltIcon fontSize="small"/> {likes.length}
         </Button>
-       { canDelete && <Button size="small" color="primary" onClick={()=>deletePost(_id)} >
+       { canDelete && <Button size="small"  color="primary" onClick={()=>deletePost(_id)} >
           <DeleteIcon fontSize="small"/>
         </Button>}
-      </CardActions>
+      </CardActions> 
             </Card>
      
     )

@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme=>({
         background:'white',
         padding:'20px',
         borderRadius:'10px',
-        maxWidth:'350px',
+        marginBottom:'40px'
     },
    link:{
        textDecoration:'none',
@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme=>({
        borderRadius:'10px',
        padding:'0px !important',
        fontFamily:'Montserrat, sans-serif',
+       marginBottom:'40px'
 
    },
    overlay:{
@@ -32,8 +33,6 @@ const useStyles = makeStyles(theme=>({
        margin:'none',
        background:'rgba(0,0,0,0.25)',
        borderRadius:'10px',
-       
-
    }
 
 
@@ -60,11 +59,11 @@ const Login = ({login, isAuthenticated}) => {
     }
 
     return (
-        <Container style={{marginTop:'80px',marginBottom:'80px'}} >
+        <div style={{marginLeft:'auto',marginRight:'auto',marginTop:'80px',marginBottom:'80px',maxWidth:'80%'}} >
 
-        <Grid container justify='space-between'  >
+        <Grid container direction="row" justify='space-between'  >
 
-            <Grid item sm={8} className={classes.poster} >
+            <Grid item sm={12} md={7} className={classes.poster} >
                 <div className={classes.overlay}>
                 <Typography variant="h1" style={{color:'white',padding:'10px'}} >
                     Welcome Back!
@@ -74,8 +73,10 @@ const Login = ({login, isAuthenticated}) => {
                 </Typography>
                 </div>
             </Grid>
+            
+            <Grid item sm={false} md={1} />
 
-            <Grid item sm={4} container direction="column" alignContent="center" className={classes.login} >
+            <Grid item sm={12} md={4}  container direction="column" alignContent="center" className={classes.login} >
             <Typography variant="h4" >Sign In</Typography>
 
             <form className={classes.form} autoComplete='off' noValidate onSubmit={handleSubmit} > 
@@ -105,7 +106,7 @@ const Login = ({login, isAuthenticated}) => {
             </Grid>
 
             </Grid>
-        </Container>
+        </div>
     )
 }
 

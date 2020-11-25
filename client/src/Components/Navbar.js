@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import {Link} from 'react-router-dom';
-import {Container, Grid, Typography} from '@material-ui/core';
+import { Grid, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import logo from '../images/logo.png';
 import {connect} from 'react-redux';
@@ -10,23 +10,28 @@ const useStyles = makeStyles(theme=>({
     navbar:{
         backgroundColor:'white',
         borderRadius:'10px',
+        maxWidth:'80%',
+        margin:'auto',
         marginTop:'20px',
         padding:'10px',
         fontFamily:'Montserrat, sans-serif',
+        
     },
     link:{
         marginLeft:'10px',
+        marginTop:'5px',
         color:'grey',
         textDecoration:'none',
         fontSize:'1.3rem', 
         '&:hover':{
             color:'blue',
-        }       
+        },
+        
     },
     logo:{
         color:'black',
-        textDecoration:'none',
-    },
+        textDecoration:'none'
+    }
     
 
 }))
@@ -50,19 +55,19 @@ const Navbar = ({auth:{isAuthenticated,loading},logout}) => {
     )
 
     return (
-        <Container className={classes.navbar} maxWidth="lg">
-            <Grid container direction="row" justify="space-between" alignItems="center">
-            <Grid item xs={6} container direction="row" > 
+        <div className={classes.navbar} >
+            <Grid container direction="row" className={classes.brand} justify="space-between" alignItems="center">
+            <Grid item xs={12} md={4}  container direction="row" > 
                 <img src={logo} alt="logo" height="50px" width="50px" />
                 <Link className={classes.logo} to="/">
                 <Typography variant="h3" style={{fontFamily:'Pacifico, cursive'}} >Memories</Typography> 
                 </Link>   
              </Grid>
-            <Grid item md={2} container direction="row" justify="space-evenly" >
+            <Grid item xs={12} md={3} container direction="row" justify="space-evenly" >
                {!loading && (<Fragment> {isAuthenticated? authLinks : guestLinks} </Fragment>)}
             </Grid>
             </Grid>
-        </Container>
+        </div>
     )
 }
 

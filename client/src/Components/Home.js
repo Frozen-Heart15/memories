@@ -11,15 +11,15 @@ const Home = ({getPosts, post:{posts, loading}}) => {
     },[getPosts, posts])
 
     return (
-        <Container style={{marginTop:'40px'}}>
+        <div style={{maxWidth:'80%',margin:'auto',marginTop:'40px'}}>
             <Grid container alignItems='stretch' spacing={2}>
                 {posts.map(post => {
-                    return (<Grid item xs={12} md={3} key={post._id}>
+                    return (<Grid item xs={12} sm={6} md={4} lg={3} key={post._id}>
                     <PostItem post={post} canDelete={false}/>
                     </Grid>)
                 })}
             </Grid>
-        </Container>
+        </div>
     )
 }
 

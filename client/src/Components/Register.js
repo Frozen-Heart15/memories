@@ -13,8 +13,8 @@ const useStyles = makeStyles(theme=>({
         background:'white',
         padding:'20px',
         borderRadius:'10px',
-        maxWidth:'350px',
-    },
+        marginBottom:'40px',
+        },
    link:{
        textDecoration:'none',
        color:'blue'
@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme=>({
     borderRadius:'10px',
     padding:'0px !important',
     fontFamily:'Montserrat, sans-serif',
+    marginBottom:'40px',
 
 },
 overlay:{
@@ -65,11 +66,11 @@ const Register = ({setAlert,register, isAuthenticated}) => {
     }
 
     return (
-        <Container style={{marginTop:'80px',marginBottom:'80px'}} >
+        <div style={{maxWidth:'80%',margin:'auto',marginTop:'80px',marginBottom:'80px'}} >
 
         <Grid container justify='space-between'  >
 
-        <Grid item sm={8} className={classes.poster} >
+        <Grid item sm={12} md={7} className={classes.poster} >
                 <div className={classes.overlay}>
                 <Typography variant="h2" style={{color:'white',padding:'10px',paddingTop:'20px'}} >
                     Store memories so that they last forever.
@@ -80,7 +81,9 @@ const Register = ({setAlert,register, isAuthenticated}) => {
                 </div>
             </Grid>
 
-            <Grid item xs={4} container direction="column" alignContent="center" className={classes.register} >
+            <Grid item sm={0} md={1} />
+
+            <Grid item sm={12} md={4} container direction="column" alignContent="center" className={classes.register} >
             <Typography variant="h4" >Sign Up</Typography>
 
             <form className={classes.root} autoComplete='off' onSubmit={handleSubmit} > 
@@ -124,7 +127,7 @@ const Register = ({setAlert,register, isAuthenticated}) => {
 
             </Grid>
 
-        </Container>
+        </div>
     )
 }
 
